@@ -5,8 +5,8 @@
 이름 | 학과 |  학번  | 이메일 | Github
 ------------ | -------------  | ------------- | -------------  | ------------- 
 이창렬 | 컴퓨터공학과 | 2019110634 | lclgood@khu.ac.kr | [Github Link](https://github.com/SteveArseneLee)
- |  |  | devopser97@gmail.com | [Github Link](https://github.com/DevopsPracticer)
- |  |  | dlckdfuf21@gmail.com | [Github Link](https://github.com/ArseneTest)
+| |  |  | devopser97@gmail.com | [Github Link](https://github.com/DevopsPracticer)
+| |  |  | dlckdfuf21@gmail.com | [Github Link](https://github.com/ArseneTest)
 
 ## 🔖 주제
 The IIS platform helps users make investments based on information from four areas (apartments, land, stocks, and coins). The main target group is to show the past and present market prices of representative investment methods for all ages so that anyone can easily start investing.
