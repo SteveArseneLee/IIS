@@ -30,3 +30,8 @@ As a service for **prospective entrepreneurs**, it is a service that informs whi
 - AWS EC2
 - AWS S3
 - Snowflake
+
+### 사용방법
+Spark -> Kafka -> Flink -> Kafka -> S3 or FS가 한 pipeline을 형성하며 각 pipeline의 결과물을 하나의 data warehouse라고 가정한다.
+모든 Data warehouse는 Snowflake의 sub-query를 통해 취합된다.
+각 branch별로 회사를 가정하여 진행하며 각각 다른 AWS EC2 인스턴스를 활용한다.
