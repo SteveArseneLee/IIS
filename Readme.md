@@ -4,5 +4,9 @@ Stock_screener에는 전세계와 미국 나스닥의 ticker들이 있고, Ticke
 
 본 프로젝트에서는 Korean_stock의 kospi와 kosdaq의 일부 데이터만을 이용할 예정이다.
 
+### Feature
+Kafka - kafdrop
+AWS S3
+
 ### Pipeline 순으로 처리
 Korean_stock.py -> 
