@@ -9,4 +9,4 @@ Kafka - kafdrop
 AWS S3
 
 ### Pipeline 순으로 처리
-Korean_stock.py -> 
+Korean_stock.py를 통해 생성된 데이터를 airflow.py로 Korean_data_sql.py로 spark 진행.
