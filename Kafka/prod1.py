@@ -1,4 +1,18 @@
-from kafka import KafkaConsumer, KafkaProducer
+from kafka import KafkaProducer 
+import csv 
 import json 
+import time 
 
-# 카프카에서 데이터를 어떻게 처리할지 고민중
+brokers = ["localhost:9091", "localhost:9092", "localhost:9093"]
+producer = KafkaProducer(bootstrap_servers = brokers)
+
+topicName = "trips"
+
+with open("./trips/yellow_tripdata_2021-01.csv", "r") as file:
+  reader = csv.reader(file)
+  headings = next(reader)
+
+  for row in reader:
+    producer.send(topicName, json.dumps(row).encode("utf-8"))
+    print(row)
+    time.sleep(1)
