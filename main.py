@@ -2,10 +2,6 @@ import pandas as pd
 from datetime import datetime
 import time
 
-from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
-
-
 period1 = int(time.mktime(datetime(2020,1,1,00,00).timetuple()))
 period2 = int(time.mktime(datetime(2022,11,1,23,59).timetuple()))
 interval = '1d' # '1d, 1m
@@ -15,10 +11,6 @@ interval = '1d' # '1d, 1m
 stock_type = {
     'kospi': 'stockMkt',
     'kosdaq': 'kosdaqMkt'
-}
-
-default_args = {
-  'start_date': datetime(2022, 1, 1),
 }
 
 # 회사명으로 주식 종목 코드를 획득할 수 있도록 하는 함수
@@ -74,23 +66,9 @@ def each_data_save():
         print(test.iloc[i,0])
         query_string = f'https://query1.finance.yahoo.com/v7/finance/download/{test.iloc[i,1]}?period1={period1}&period2={period2}&interval={interval}&events=history&includeAdjustedClose=true'
         df = pd.read_csv(query_string)
-        print(df)
+        # print(df)
         df.to_csv("/home/steve/Capstone2/Korean_stock/Korean_stock_data/"+test.iloc[i,0]+".csv", index=False)
 
 if __name__ == "__main__":
     tickers_save()
     each_data_save()
-    
-    with DAG(dag_id='stock-data-pipeline',
-         schedule_interval='@daily',
-         default_args=default_args,
-         tags=['stock'],
-         catchup=False) as dag:
-      high = SparkSubmitOperator(
-        application="/home/steve/Capstone2/Spark/Korean_stock_high.py", task_id="High_Value", conn_id="stock_spark_local"
-      )
-      open = SparkSubmitOperator(
-        application="/home/steve/Capstone2/Spark/Korean_stock_open.py", task_id="Open_Value", conn_id="stock_spark_local"
-      )
-      
-      high >> open
