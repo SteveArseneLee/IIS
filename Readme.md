@@ -10,3 +10,7 @@ AWS S3
 
 ### Pipeline 순으로 처리
 main.py를 통해 생성된 데이터를 airflow.py로 spark 진행.
+
+### Requirements
+pip install apache-airflow
+pip install apache-airflow-providers-apache-spark
