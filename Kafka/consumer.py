@@ -5,7 +5,7 @@ import datetime
 from io import StringIO
 import pandas as pd
 brokers = ["localhost:9091", "localhost:9092", "localhost:9093"]
-TOPIC_NAME = "Stock-Close"
+TOPIC_NAME = "Stock"
 consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=brokers,
                         #  auto_offset_reset='earliest',
                          enable_auto_commit=False,
@@ -14,14 +14,13 @@ consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=brokers,
 # AWS Config
 
 
-
 client = boto3.client('s3',
                       aws_access_key_id=AWS_ACCESS_KEY_ID,
                       aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
                       region_name=AWS_DEFAULT_REGION
                       )
 
-BUCKET_NAME = "pipeline-stock-datas"
+BUCKET_NAME = "pipeline-stock"
 
 n = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
 t = str(n.year)+str(n.month)+str(n.day)+str(n.hour)+str(n.minute)+str(n.second)
@@ -31,7 +30,7 @@ t = str(n.year)+str(n.month)+str(n.day)+str(n.hour)+str(n.minute)+str(n.second)
 
 for message in consumer:
     try:
-        s3_path = f"{message.key.decode()}_Close_{t}.csv"
+        s3_path = f"{message.key.decode()}_{t}.csv"
         print(f"data get : {s3_path}")
         
         csv_buffer = StringIO()
@@ -39,7 +38,7 @@ for message in consumer:
         
         raw_data.to_csv(csv_buffer, encoding="euc-kr", index=False)
         
-        # client.put_object(Body=csv_buffer.getvalue(), Bucket=BUCKET_NAME,Key=s3_path)
+        client.put_object(Body=csv_buffer.getvalue(), Bucket=BUCKET_NAME,Key=s3_path)
         # print(raw_data)
     except Exception as e:
         print(f"error : {e.__str__()}")

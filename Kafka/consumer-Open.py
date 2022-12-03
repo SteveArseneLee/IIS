@@ -11,10 +11,8 @@ consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=brokers,
                          enable_auto_commit=False,
 )
 
-#-------------------------------------------------
 # AWS Config
 
-#-------------------------------------------------
 
 client = boto3.client('s3',
                       aws_access_key_id=AWS_ACCESS_KEY_ID,
@@ -40,7 +38,7 @@ for message in consumer:
         
         raw_data.to_csv(csv_buffer, encoding="euc-kr")
         
-        client.put_object(Body=csv_buffer.getvalue(), Bucket=BUCKET_NAME,Key=s3_path)
+        # client.put_object(Body=csv_buffer.getvalue(), Bucket=BUCKET_NAME,Key=s3_path)
         # print(raw_data)
     except Exception as e:
         print(f"error : {e.__str__()}")

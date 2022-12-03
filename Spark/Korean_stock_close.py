@@ -29,7 +29,8 @@ for (root, directories, files) in os.walk(dir_path):
         
         query = f"""
         SELECT
-            Date, Close
+            DATE_FORMAT(TO_DATE(Date), 'yyyy-M-dd') AS date, 
+            close as close_value
         FROM
             {name}
         """
