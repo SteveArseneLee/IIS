@@ -23,12 +23,19 @@ As a service for **prospective entrepreneurs**, it is a service that informs whi
 
 
 ### 🗃️ Development Environment
+**Data Processing**
 - Apache Kafka
 - Apache Spark
+**Dataflow**
 - Apache Airflow
+**Computing**
 - AWS EC2
+**Storage**
 - AWS S3
+- Google Cloud Storage
+**Data Federate**
 - Snowflake
+**Data Visualization**
 - Tableau
 
 ### 사용방법
