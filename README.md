@@ -25,11 +25,11 @@ As a service for **prospective entrepreneurs**, it is a service that informs whi
 ### 🗃️ Development Environment
 - Apache Kafka
 - Apache Spark
-- Apache Flink
 - Apache Airflow
 - AWS EC2
 - AWS S3
 - Snowflake
+- Tableau
 
 ### 사용방법
 Spark -> Kafka -> Flink -> Kafka -> S3 or FS가 한 pipeline을 형성하며 각 pipeline의 결과물을 하나의 data warehouse라고 가정한다.
