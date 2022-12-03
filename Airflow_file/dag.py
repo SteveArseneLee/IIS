@@ -16,28 +16,31 @@ with DAG(dag_id='stock-data-pipeline',
               tags=['stock'],
               catchup=False) as dag:
 
-      Main_Process = BashOperator(
-        task_id="main_process",
-        bash_command='python3 /home/steve/Stock/main.py'
-      )
       Consume_All = BashOperator(
         task_id = "consume_all",
-        bash_command='nohup python3 /home/steve/Stock/Kafka/consumer.py & > /dev/null'
+        bash_command="nohup python3 /home/steve/Cryptocurrency/Kafka/consumer.py & > /dev/null"
+      )
+      Consume_High = BashOperator(
+        task_id = "consume_high",
+        bash_command="nohup python3 /home/steve/Cryptocurrency/Kafka/consumer_cryp_high.py & > /dev/null" 
+      )
+      Consume_Now = BashOperator(
+        task_id = "consume_now",
+        bash_command="nohup python3 /home/steve/Cryptocurrency/Kafka/consumer_cryp_now.py & > /dev/null" 
+      )
+      Value_generator = SparkSubmitOperator(
+        application="/home/steve/Cryptocurrency/Spark/Cryp.py",
+        task_id="Value_generator",
+        conn_id="stock_spark_local"
       )
       High_Value = SparkSubmitOperator(
-        application="/home/steve/Stock/Spark/Korean_stock_high.py",
+        application="/home/steve/Cryptocurrency/Spark/Cryp_high.py",
         task_id="High_Value",
         conn_id="stock_spark_local"
       )
-      Open_Value = SparkSubmitOperator(
-        application="/home/steve/Stock/Spark/Korean_stock_open.py",
-        task_id="Open_Value",
+      Now_Value = SparkSubmitOperator(
+        application="/home/steve/Cryptocurrency/Spark/Korean_stock_open.py",
+        task_id="Now_Value",
         conn_id="stock_spark_local"
       )
-      Close_Value = SparkSubmitOperator(
-        application="/home/steve/Stock/Spark/Korean_stock_close.py",
-        task_id="Close_Value",
-        conn_id="stock_spark_local"
-      )
-      
-      Main_Process >> Consume_All >> High_Value >> Open_Value >> Close_Value
+      Consume_All >> Consume_High >> Consume_Now >> Value_generator >> High_Value >> Now_Value

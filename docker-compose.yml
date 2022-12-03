@@ -59,8 +59,8 @@ services:
       - ./data/kafka3/data:/tmp/kafka-logs
     depends_on:
       - zookeeper
-  kafdrop:
-    image: obsidiandynamics/kafdrop
+  akhq:
+    image: tchiotludo/akhq:latest
     restart: "no"
     ports: 
       - "9000:9000"
