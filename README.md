@@ -13,6 +13,11 @@ The IIS platform helps users make investments based on information from four are
 
 IIS 플랫폼은 4가지 분야(아파트, 토지, 주식, 코인)의 정보를 토대로 사용자가 투자를 할 수 있게끔 도와준다. 주요 대상층은 전 연령대로 하여 대표적인 투자 방법들의 과거와 현재 시세를 보여주어 누구든 손쉽게 투자를 시작할 수 있도록 하는 것이 본 프로젝트의 목표이다.
 
+## 핵심 기술
+![image](https://user-images.githubusercontent.com/51083890/206097081-a0a2f0a1-9f54-42c8-a410-2646bbfd056e.png)
+
+
+
 ## 📑 프로젝트 소개
 To explain first in a large approximate framework, large-capacity unstructured data of different schemas from each source are primarily processed in Spark and supplied to Kafka according to Airflow's schedule. After that, Kafka's data is quickly purified by Flink and sent back to the new Kafka. Data entering Kafka is stored in AWS S3 or GCP File Storage. This results in the formation of a stem. As mentioned in the topic, four pipelines are constructed, and all pipelines are automatically scheduled via Airflow. Finally, instead of duplicating data from each stem through a virtual data warehouse in Snowflake, the inquired data is viewed in real time and viewed through Tableau.
 
@@ -23,6 +28,9 @@ As a service for **prospective entrepreneurs**, it is a service that informs whi
 
 
 ### 🗃️ Development Environment
+![image](https://user-images.githubusercontent.com/51083890/206097118-bdd2a2f9-d634-473a-848b-2b42478b5542.png)
+![image](https://user-images.githubusercontent.com/51083890/206097136-37471003-54d4-4b10-888e-57890cc31c55.png)
+
 **Data Processing**  
 - Apache Kafka
 - Apache Spark  
